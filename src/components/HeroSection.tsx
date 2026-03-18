@@ -1,9 +1,29 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Calendar } from "lucide-react";
+import { ArrowRight, Calendar, Zap, Loader2, AlertCircle } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
+import { simulateHeal, triggerWebhook } from "@/api";
 
 const HeroSection = () => {
+  const [result, setResult] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleAction = async (action: () => Promise<any>) => {
+    setLoading(true);
+    setError(null);
+    setResult(null);
+    try {
+      const data = await action();
+      setResult(data);
+    } catch (err: any) {
+      setError(err.message || "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background */}
@@ -36,15 +56,60 @@ const HeroSection = () => {
             HealOps automatically detects issues, analyzes root causes, and fixes your infrastructure in real-time — so you don't need a full DevOps team.
           </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="gap-2 text-base px-8" onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}>
-              Get Started <ArrowRight size={18} />
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" className="gap-2 text-base px-8" disabled={loading} onClick={() => handleAction(simulateHeal)}>
+              {loading ? <Loader2 size={18} className="animate-spin" /> : <ArrowRight size={18} />}
+              {loading ? "Processing..." : "Get Started"}
+            </Button>
+            <Button size="lg" variant="outline" className="gap-2 text-base px-8 border-border hover:bg-muted" disabled={loading} onClick={() => handleAction(triggerWebhook)}>
+              <Zap size={18} /> Trigger Auto-Heal
             </Button>
             <Button size="lg" variant="outline" className="gap-2 text-base px-8 border-border hover:bg-muted" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
               <Calendar size={18} /> Book Free Consultation
             </Button>
           </div>
         </motion.div>
+
+        {/* Error Display */}
+        {error && (
+          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mt-8 max-w-lg mx-auto">
+            <div className="flex items-center gap-2 rounded-lg border border-destructive/50 bg-destructive/10 p-4 text-destructive">
+              <AlertCircle size={18} />
+              <span className="text-sm">{error}</span>
+            </div>
+          </motion.div>
+        )}
+
+        {/* Result Display */}
+        {result && (
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mt-8 max-w-md mx-auto">
+            <div className="rounded-xl border border-border bg-card/80 backdrop-blur-sm p-6 shadow-lg text-left">
+              <h3 className="text-lg font-semibold text-foreground mb-4">Auto-Heal Result</h3>
+              <div className="space-y-3">
+                {result.issue && (
+                  <div className="flex justify-between">
+                    <span className="text-sm text-muted-foreground">Issue</span>
+                    <span className="text-sm font-medium text-foreground">{result.issue}</span>
+                  </div>
+                )}
+                {result.action && (
+                  <div className="flex justify-between">
+                    <span className="text-sm text-muted-foreground">Action</span>
+                    <span className="text-sm font-medium text-foreground">{result.action}</span>
+                  </div>
+                )}
+                {result.status && (
+                  <div className="flex justify-between">
+                    <span className="text-sm text-muted-foreground">Status</span>
+                    <span className={`text-sm font-semibold ${result.status === "success" ? "text-green-500" : "text-red-500"}`}>
+                      {result.status}
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
+          </motion.div>
+        )}
       </div>
     </section>
   );
