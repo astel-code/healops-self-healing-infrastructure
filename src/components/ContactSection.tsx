@@ -74,7 +74,7 @@ const ContactSection = () => {
                 <p className="font-medium">Connect on LinkedIn</p>
               </div>
             </a>
-            <a href="https://wa.me/916238053614" target="_blank" rel="noopener noreferrer" className="glass-card p-6 flex items-center gap-4 hover:border-primary/40 transition-all duration-300 block">
+            <a href="https://wa.me/916238053614?text=Hi%20I%20am%20interested%20in%20HealOps" target="_blank" rel="noopener noreferrer" className="glass-card p-6 flex items-center gap-4 hover:border-primary/40 transition-all duration-300 block">
               <div className="w-12 h-12 rounded-xl bg-green-500/10 text-green-500 flex items-center justify-center">
                 <MessageCircle size={22} />
               </div>
