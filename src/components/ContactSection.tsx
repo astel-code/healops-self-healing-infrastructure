@@ -115,8 +115,9 @@ const ContactSection = () => {
               className="bg-muted/50 border-border min-h-[120px]"
               required
             />
-            <Button type="submit" className="w-full gap-2">
-              <Send size={16} /> Start Free Consultation
+            <Button type="submit" className="w-full gap-2" disabled={loading}>
+              {loading ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
+              {loading ? "Sending..." : "Start Free Consultation"}
             </Button>
           </motion.form>
         </div>
