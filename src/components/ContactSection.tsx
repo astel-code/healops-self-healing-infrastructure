@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Phone, Mail, Send } from "lucide-react";
+import { Phone, Mail, Send, Linkedin, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -20,15 +20,15 @@ const ContactSection = () => {
       <div className="container mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">
-            Get in <span className="gradient-text">Touch</span>
+            Book a Free <span className="gradient-text">Consultation</span>
           </h2>
-          <p className="text-muted-foreground text-lg">Ready to automate your cloud? Let's talk.</p>
+          <p className="text-muted-foreground text-lg max-w-xl mx-auto">Start automating your cloud infrastructure today with HealOps.</p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
           {/* Info */}
-          <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-8">
-            <div className="glass-card p-6 flex items-center gap-4">
+          <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-5">
+            <a href="tel:6238053614" className="glass-card p-6 flex items-center gap-4 hover:border-primary/40 transition-all duration-300 block">
               <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
                 <Phone size={22} />
               </div>
@@ -36,8 +36,8 @@ const ContactSection = () => {
                 <p className="text-sm text-muted-foreground">Phone</p>
                 <p className="font-medium">6238053614</p>
               </div>
-            </div>
-            <div className="glass-card p-6 flex items-center gap-4">
+            </a>
+            <a href="mailto:asteltom0@gmail.com" className="glass-card p-6 flex items-center gap-4 hover:border-primary/40 transition-all duration-300 block">
               <div className="w-12 h-12 rounded-xl bg-accent/10 text-accent flex items-center justify-center">
                 <Mail size={22} />
               </div>
@@ -45,7 +45,25 @@ const ContactSection = () => {
                 <p className="text-sm text-muted-foreground">Email</p>
                 <p className="font-medium">asteltom0@gmail.com</p>
               </div>
-            </div>
+            </a>
+            <a href="https://www.linkedin.com/in/asteltom/" target="_blank" rel="noopener noreferrer" className="glass-card p-6 flex items-center gap-4 hover:border-primary/40 transition-all duration-300 block">
+              <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+                <Linkedin size={22} />
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">LinkedIn</p>
+                <p className="font-medium">Connect on LinkedIn</p>
+              </div>
+            </a>
+            <a href="https://wa.me/916238053614" target="_blank" rel="noopener noreferrer" className="glass-card p-6 flex items-center gap-4 hover:border-primary/40 transition-all duration-300 block">
+              <div className="w-12 h-12 rounded-xl bg-green-500/10 text-green-500 flex items-center justify-center">
+                <MessageCircle size={22} />
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">WhatsApp</p>
+                <p className="font-medium">Message us on WhatsApp</p>
+              </div>
+            </a>
           </motion.div>
 
           {/* Form */}
@@ -79,7 +97,7 @@ const ContactSection = () => {
               required
             />
             <Button type="submit" className="w-full gap-2">
-              <Send size={16} /> Start Automating Your Cloud
+              <Send size={16} /> Start Free Consultation
             </Button>
           </motion.form>
         </div>

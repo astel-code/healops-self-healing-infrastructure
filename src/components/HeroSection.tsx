@@ -36,11 +36,11 @@ const HeroSection = () => {
             HealOps automatically detects issues, analyzes root causes, and fixes your infrastructure in real-time — so you don't need a full DevOps team.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="gap-2 text-base px-8">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" className="gap-2 text-base px-8" onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}>
               Get Started <ArrowRight size={18} />
             </Button>
-            <Button size="lg" variant="outline" className="gap-2 text-base px-8 border-border hover:bg-muted">
+            <Button size="lg" variant="outline" className="gap-2 text-base px-8 border-border hover:bg-muted" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
               <Calendar size={18} /> Book Free Consultation
             </Button>
           </div>
