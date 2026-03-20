@@ -18,11 +18,7 @@ const ContactSection = () => {
       await emailjs.send(
         "service_tvx2ys3",
         "template_i7a5bss",
-        {
-          user_name: form.name,
-          user_email: form.email,
-          message: form.message,
-        },
+        { user_name: form.name, user_email: form.email, message: form.message },
         "8TuRRQKO3_NHJgaPy"
       );
       toast.success("Message sent! We'll get back to you soon.");
@@ -34,10 +30,23 @@ const ContactSection = () => {
     }
   };
 
+  const contactLinks = [
+    { href: "tel:6238053614", icon: Phone, label: "Phone", value: "6238053614", color: "bg-primary/10 text-primary" },
+    { href: "mailto:asteltom0@gmail.com", icon: Mail, label: "Email", value: "asteltom0@gmail.com", color: "bg-accent/10 text-accent" },
+    { href: "https://www.linkedin.com/in/asteltom/", icon: Linkedin, label: "LinkedIn", value: "Connect on LinkedIn", color: "bg-primary/10 text-primary", external: true },
+    { href: "https://wa.me/916238053614?text=Hi%20I%20am%20interested%20in%20HealOps", icon: MessageCircle, label: "WhatsApp", value: "Message us on WhatsApp", color: "bg-green-500/10 text-green-500", external: true },
+  ];
+
   return (
     <section id="contact" className="section-padding bg-muted/30">
       <div className="container mx-auto">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
           <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">
             Book a Free <span className="gradient-text">Consultation</span>
           </h2>
@@ -46,79 +55,81 @@ const ContactSection = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
           {/* Info */}
-          <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-5">
-            <a href="tel:6238053614" className="glass-card p-6 flex items-center gap-4 hover:border-primary/40 transition-all duration-300 block">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
-                <Phone size={22} />
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">Phone</p>
-                <p className="font-medium">6238053614</p>
-              </div>
-            </a>
-            <a href="mailto:asteltom0@gmail.com" className="glass-card p-6 flex items-center gap-4 hover:border-primary/40 transition-all duration-300 block">
-              <div className="w-12 h-12 rounded-xl bg-accent/10 text-accent flex items-center justify-center">
-                <Mail size={22} />
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">Email</p>
-                <p className="font-medium">asteltom0@gmail.com</p>
-              </div>
-            </a>
-            <a href="https://www.linkedin.com/in/asteltom/" target="_blank" rel="noopener noreferrer" className="glass-card p-6 flex items-center gap-4 hover:border-primary/40 transition-all duration-300 block">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
-                <Linkedin size={22} />
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">LinkedIn</p>
-                <p className="font-medium">Connect on LinkedIn</p>
-              </div>
-            </a>
-            <a href="https://wa.me/916238053614?text=Hi%20I%20am%20interested%20in%20HealOps" target="_blank" rel="noopener noreferrer" className="glass-card p-6 flex items-center gap-4 hover:border-primary/40 transition-all duration-300 block">
-              <div className="w-12 h-12 rounded-xl bg-green-500/10 text-green-500 flex items-center justify-center">
-                <MessageCircle size={22} />
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">WhatsApp</p>
-                <p className="font-medium">Message us on WhatsApp</p>
-              </div>
-            </a>
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="space-y-5"
+          >
+            {contactLinks.map((link, i) => (
+              <motion.a
+                key={link.label}
+                href={link.href}
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noopener noreferrer" : undefined}
+                className="glass-card p-6 flex items-center gap-4 hover:border-primary/40 transition-all duration-300 block"
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.5 }}
+                whileHover={{ scale: 1.03, x: 8, transition: { duration: 0.2 } }}
+              >
+                <motion.div
+                  className={`w-12 h-12 rounded-xl ${link.color} flex items-center justify-center`}
+                  whileHover={{ rotate: 15 }}
+                  transition={{ type: "spring" }}
+                >
+                  <link.icon size={22} />
+                </motion.div>
+                <div>
+                  <p className="text-sm text-muted-foreground">{link.label}</p>
+                  <p className="font-medium">{link.value}</p>
+                </div>
+              </motion.a>
+            ))}
           </motion.div>
 
           {/* Form */}
           <motion.form
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: 40, rotateY: -8 }}
+            whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             onSubmit={handleSubmit}
             className="glass-card p-8 space-y-5"
+            style={{ transformPerspective: 1000 }}
           >
-            <Input
-              placeholder="Your Name"
-              value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
-              className="bg-muted/50 border-border"
-              required
-            />
+            <motion.div whileFocus={{ scale: 1.02 }}>
+              <Input
+                placeholder="Your Name"
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                className="bg-muted/50 border-border transition-all duration-300 focus:shadow-glow-sm"
+                required
+              />
+            </motion.div>
             <Input
               type="email"
               placeholder="Your Email"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
-              className="bg-muted/50 border-border"
+              className="bg-muted/50 border-border transition-all duration-300 focus:shadow-glow-sm"
               required
             />
             <Textarea
               placeholder="Your Message"
               value={form.message}
               onChange={(e) => setForm({ ...form, message: e.target.value })}
-              className="bg-muted/50 border-border min-h-[120px]"
+              className="bg-muted/50 border-border min-h-[120px] transition-all duration-300 focus:shadow-glow-sm"
               required
             />
-            <Button type="submit" className="w-full gap-2" disabled={loading}>
-              {loading ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
-              {loading ? "Sending..." : "Start Free Consultation"}
-            </Button>
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+              <Button type="submit" className="w-full gap-2" disabled={loading}>
+                {loading ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
+                {loading ? "Sending..." : "Start Free Consultation"}
+              </Button>
+            </motion.div>
           </motion.form>
         </div>
       </div>

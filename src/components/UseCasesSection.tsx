@@ -11,7 +11,13 @@ const cases = [
 const UseCasesSection = () => (
   <section id="use-cases" className="section-padding">
     <div className="container mx-auto">
-      <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-16"
+      >
         <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">
           Built for <span className="gradient-text">Your Use Case</span>
         </h2>
@@ -21,15 +27,26 @@ const UseCasesSection = () => (
         {cases.map((c, i) => (
           <motion.div
             key={c.title}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
+            initial={{ opacity: 0, x: i % 2 === 0 ? -60 : 60, rotateY: i % 2 === 0 ? -10 : 10 }}
+            whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ delay: i * 0.12, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            whileHover={{
+              scale: 1.04,
+              rotateY: 5,
+              rotateX: -3,
+              transition: { duration: 0.25 },
+            }}
+            style={{ transformPerspective: 1000 }}
             className="glass-card-hover p-8 flex gap-5"
           >
-            <div className="w-14 h-14 rounded-2xl bg-accent/10 text-accent flex items-center justify-center flex-shrink-0">
+            <motion.div
+              className="w-14 h-14 rounded-2xl bg-accent/10 text-accent flex items-center justify-center flex-shrink-0"
+              whileHover={{ rotate: 15, scale: 1.1 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
               <c.icon size={26} />
-            </div>
+            </motion.div>
             <div>
               <h3 className="font-heading font-semibold text-lg mb-1">{c.title}</h3>
               <p className="text-sm text-muted-foreground">{c.desc}</p>

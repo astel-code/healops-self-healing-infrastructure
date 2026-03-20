@@ -10,9 +10,13 @@ import FutureVisionSection from "@/components/FutureVisionSection";
 import ContactSection from "@/components/ContactSection";
 import FooterSection from "@/components/FooterSection";
 import ChatbotIcon from "@/components/ChatbotIcon";
+import CustomCursor from "@/components/CustomCursor";
+import PageLoader from "@/components/PageLoader";
 
 const Index = () => (
-  <div className="min-h-screen bg-background">
+  <div className="min-h-screen bg-background cursor-none">
+    <PageLoader />
+    <CustomCursor />
     <Navbar />
     <HeroSection />
     <HowItWorks />
