@@ -1,9 +1,18 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Calendar, Zap, Loader2, AlertCircle } from "lucide-react";
+import { ArrowRight, Calendar, Zap, Loader2, AlertCircle, Shield, Cpu, Activity, CloudCog, Radar, Wrench } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 import { simulateHeal, triggerWebhook } from "@/api";
+
+const floatingIcons = [
+  { Icon: Shield, className: "top-[15%] left-[10%] animate-float text-primary/20", size: 32 },
+  { Icon: Cpu, className: "top-[20%] right-[12%] animate-float-slow text-accent/20", size: 28 },
+  { Icon: Activity, className: "bottom-[30%] left-[8%] animate-float-reverse text-primary/15", size: 36 },
+  { Icon: CloudCog, className: "top-[40%] right-[6%] animate-float text-accent/15", size: 30, delay: "2s" },
+  { Icon: Radar, className: "bottom-[20%] right-[15%] animate-float-slow text-primary/20", size: 24, delay: "1s" },
+  { Icon: Wrench, className: "top-[60%] left-[5%] animate-float-reverse text-accent/15", size: 26, delay: "3s" },
+];
 
 const HeroSection = () => {
   const [result, setResult] = useState<any>(null);
@@ -32,9 +41,30 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/80 to-background" />
       </div>
 
-      {/* Floating glow orbs */}
+      {/* Animated glow orbs */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[120px] animate-pulse-glow" />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/20 rounded-full blur-[100px] animate-pulse-glow" style={{ animationDelay: "1s" }} />
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/20 rounded-full blur-[100px] animate-pulse-glow" style={{ animationDelay: "2s" }} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px] animate-drift" />
+
+      {/* Floating icons */}
+      {floatingIcons.map(({ Icon, className, size, delay }, i) => (
+        <div key={i} className={`absolute ${className}`} style={{ animationDelay: delay || "0s" }}>
+          <Icon size={size} />
+        </div>
+      ))}
+
+      {/* Orbiting particle ring */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0">
+        <div className="animate-orbit" style={{ animationDuration: "25s" }}>
+          <div className="w-2 h-2 rounded-full bg-primary/30 shadow-glow-sm" />
+        </div>
+        <div className="animate-orbit" style={{ animationDuration: "18s", animationDelay: "5s" }}>
+          <div className="w-1.5 h-1.5 rounded-full bg-accent/30 shadow-glow-sm" />
+        </div>
+        <div className="animate-orbit" style={{ animationDuration: "30s", animationDelay: "10s" }}>
+          <div className="w-1 h-1 rounded-full bg-primary/40" />
+        </div>
+      </div>
 
       <div className="container relative z-10 mx-auto px-4 text-center">
         <motion.div
