@@ -18,14 +18,14 @@
     --primary: 215 83% 52%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 212 100% 67%;
-    --secondary-foreground: 0 0% 5%;
+    --secondary: 260 60% 62%;
+    --secondary-foreground: 0 0% 100%;
 
     --muted: 215 18% 14%;
     --muted-foreground: 215 15% 50%;
 
-    --accent: 212 100% 67%;
-    --accent-foreground: 0 0% 5%;
+    --accent: 260 60% 62%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
@@ -39,7 +39,7 @@
     --glass-bg: 215 21% 11%;
     --glass-border: 215 18% 20%;
     --glow-primary: 215 83% 52%;
-    --glow-secondary: 212 100% 67%;
+    --glow-secondary: 260 60% 62%;
 
     --sidebar-background: 215 21% 7%;
     --sidebar-foreground: 210 29% 92%;
