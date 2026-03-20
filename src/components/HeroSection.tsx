@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar, Zap, Loader2, AlertCircle, Shield, Cpu, Activity, CloudCog, Radar, Wrench } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
@@ -20,6 +20,9 @@ const HeroSection = () => {
   const [result, setResult] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { scrollY } = useScroll();
+  const bgY = useTransform(scrollY, [0, 600], [0, 150]);
+  const opacity = useTransform(scrollY, [0, 400], [1, 0.3]);
 
   const handleAction = async (action: () => Promise<any>) => {
     setLoading(true);
@@ -37,22 +40,29 @@ const HeroSection = () => {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0">
+      {/* Parallax Background */}
+      <motion.div className="absolute inset-0" style={{ y: bgY }}>
         <img src={heroBg} alt="" className="w-full h-full object-cover opacity-40" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/80 to-background" />
-      </div>
+      </motion.div>
 
       {/* Animated glow orbs */}
       <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/25 rounded-full blur-[120px] animate-pulse-glow" />
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-accent/25 rounded-full blur-[100px] animate-pulse-glow" style={{ animationDelay: "2s" }} />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/10 rounded-full blur-[150px] animate-drift" />
 
-      {/* Floating icons */}
+      {/* Floating icons with parallax */}
       {floatingIcons.map(({ Icon, className, size, delay }, i) => (
-        <div key={i} className={`absolute ${className}`} style={{ animationDelay: delay || "0s" }}>
+        <motion.div
+          key={i}
+          className={`absolute ${className}`}
+          style={{ animationDelay: delay || "0s" }}
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.5 + i * 0.15, type: "spring", stiffness: 200 }}
+        >
           <Icon size={size} />
-        </div>
+        </motion.div>
       ))}
 
       {/* Orbiting particle ring */}
@@ -68,43 +78,78 @@ const HeroSection = () => {
         </div>
       </div>
 
-      <div className="container relative z-10 mx-auto px-4 text-center">
+      <motion.div className="container relative z-10 mx-auto px-4 text-center" style={{ opacity }}>
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0, y: 50, rotateX: 15 }}
+          animate={{ opacity: 1, y: 0, rotateX: 0 }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          style={{ perspective: 1000 }}
         >
-          <span className="inline-block px-4 py-1.5 mb-6 text-xs font-medium tracking-wider uppercase rounded-full border border-primary/30 bg-primary/10 text-primary">
+          <motion.span
+            className="inline-block px-4 py-1.5 mb-6 text-xs font-medium tracking-wider uppercase rounded-full border border-primary/30 bg-primary/10 text-primary"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3, type: "spring" }}
+            whileHover={{ scale: 1.05, borderColor: "hsl(var(--primary) / 0.6)" }}
+          >
             Self-Healing Infrastructure
-          </span>
+          </motion.span>
 
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-heading font-bold leading-tight mb-6">
+          <motion.h1
+            className="text-4xl sm:text-5xl md:text-7xl font-heading font-bold leading-tight mb-6"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+          >
             Your Cloud Should
             <br />
-            <span className="gradient-text">Fix Itself.</span>
-          </h1>
+            <motion.span
+              className="gradient-text inline-block"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.5, type: "spring", stiffness: 100 }}
+            >
+              Fix Itself.
+            </motion.span>
+          </motion.h1>
 
-          <p className="max-w-2xl mx-auto text-lg md:text-xl text-muted-foreground mb-10 leading-relaxed">
+          <motion.p
+            className="max-w-2xl mx-auto text-lg md:text-xl text-muted-foreground mb-10 leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+          >
             HealOps automatically detects issues, analyzes root causes, and fixes your infrastructure in real-time — so you don't need a full DevOps team.
-          </p>
+          </motion.p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="gap-2 text-base px-8" disabled={loading} onClick={() => handleAction(simulateHeal)}>
-              {loading ? <Loader2 size={18} className="animate-spin" /> : <ArrowRight size={18} />}
-              {loading ? "Processing..." : "Get Started"}
-            </Button>
-            <Button size="lg" variant="outline" className="gap-2 text-base px-8 border-border hover:bg-muted" disabled={loading} onClick={() => handleAction(triggerWebhook)}>
-              <Zap size={18} /> Trigger Auto-Heal
-            </Button>
-            <Button size="lg" variant="outline" className="gap-2 text-base px-8 border-border hover:bg-muted" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
-              <Calendar size={18} /> Book Free Consultation
-            </Button>
-          </div>
+          <motion.div
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+          >
+            <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.97 }}>
+              <Button size="lg" className="gap-2 text-base px-8" disabled={loading} onClick={() => handleAction(simulateHeal)}>
+                {loading ? <Loader2 size={18} className="animate-spin" /> : <ArrowRight size={18} />}
+                {loading ? "Processing..." : "Get Started"}
+              </Button>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.97 }}>
+              <Button size="lg" variant="outline" className="gap-2 text-base px-8 border-border hover:bg-muted" disabled={loading} onClick={() => handleAction(triggerWebhook)}>
+                <Zap size={18} /> Trigger Auto-Heal
+              </Button>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.97 }}>
+              <Button size="lg" variant="outline" className="gap-2 text-base px-8 border-border hover:bg-muted" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
+                <Calendar size={18} /> Book Free Consultation
+              </Button>
+            </motion.div>
+          </motion.div>
         </motion.div>
 
         {/* Error Display */}
         {error && (
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mt-8 max-w-lg mx-auto">
+          <motion.div initial={{ opacity: 0, y: 10, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} className="mt-8 max-w-lg mx-auto">
             <div className="flex items-center gap-2 rounded-lg border border-destructive/50 bg-destructive/10 p-4 text-destructive">
               <AlertCircle size={18} />
               <span className="text-sm">{error}</span>
@@ -114,7 +159,7 @@ const HeroSection = () => {
 
         {/* Result Display */}
         {result && (
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mt-8 max-w-md mx-auto">
+          <motion.div initial={{ opacity: 0, y: 20, scale: 0.9 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ type: "spring" }} className="mt-8 max-w-md mx-auto">
             <div className="rounded-xl border border-border bg-card/80 backdrop-blur-sm p-6 shadow-lg text-left">
               <h3 className="text-lg font-semibold text-foreground mb-4">Auto-Heal Result</h3>
               <div className="space-y-3">
@@ -142,7 +187,7 @@ const HeroSection = () => {
             </div>
           </motion.div>
         )}
-      </div>
+      </motion.div>
     </section>
   );
 };
