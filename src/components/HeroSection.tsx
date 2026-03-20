@@ -6,12 +6,14 @@ import heroBg from "@/assets/hero-bg.jpg";
 import { simulateHeal, triggerWebhook } from "@/api";
 
 const floatingIcons = [
-  { Icon: Shield, className: "top-[15%] left-[10%] animate-float text-primary/20", size: 32 },
-  { Icon: Cpu, className: "top-[20%] right-[12%] animate-float-slow text-accent/20", size: 28 },
-  { Icon: Activity, className: "bottom-[30%] left-[8%] animate-float-reverse text-primary/15", size: 36 },
-  { Icon: CloudCog, className: "top-[40%] right-[6%] animate-float text-accent/15", size: 30, delay: "2s" },
-  { Icon: Radar, className: "bottom-[20%] right-[15%] animate-float-slow text-primary/20", size: 24, delay: "1s" },
-  { Icon: Wrench, className: "top-[60%] left-[5%] animate-float-reverse text-accent/15", size: 26, delay: "3s" },
+  { Icon: Shield, className: "top-[15%] left-[10%] animate-float text-primary/40", size: 40 },
+  { Icon: Cpu, className: "top-[18%] right-[12%] animate-float-slow text-accent/40", size: 36 },
+  { Icon: Activity, className: "bottom-[28%] left-[7%] animate-float-reverse text-primary/30", size: 44 },
+  { Icon: CloudCog, className: "top-[45%] right-[5%] animate-float text-accent/30", size: 38, delay: "2s" },
+  { Icon: Radar, className: "bottom-[18%] right-[14%] animate-float-slow text-primary/35", size: 34, delay: "1s" },
+  { Icon: Wrench, className: "top-[65%] left-[4%] animate-float-reverse text-accent/30", size: 32, delay: "3s" },
+  { Icon: Shield, className: "top-[10%] left-[45%] animate-float-slow text-primary/20", size: 24, delay: "4s" },
+  { Icon: Cpu, className: "bottom-[12%] left-[30%] animate-float text-accent/25", size: 28, delay: "1.5s" },
 ];
 
 const HeroSection = () => {
@@ -42,9 +44,9 @@ const HeroSection = () => {
       </div>
 
       {/* Animated glow orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[120px] animate-pulse-glow" />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/20 rounded-full blur-[100px] animate-pulse-glow" style={{ animationDelay: "2s" }} />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px] animate-drift" />
+      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/25 rounded-full blur-[120px] animate-pulse-glow" />
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-accent/25 rounded-full blur-[100px] animate-pulse-glow" style={{ animationDelay: "2s" }} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/10 rounded-full blur-[150px] animate-drift" />
 
       {/* Floating icons */}
       {floatingIcons.map(({ Icon, className, size, delay }, i) => (
@@ -55,14 +57,14 @@ const HeroSection = () => {
 
       {/* Orbiting particle ring */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0">
-        <div className="animate-orbit" style={{ animationDuration: "25s" }}>
-          <div className="w-2 h-2 rounded-full bg-primary/30 shadow-glow-sm" />
+        <div className="animate-orbit" style={{ animationDuration: "20s" }}>
+          <div className="w-3 h-3 rounded-full bg-primary/50 shadow-glow-sm" />
         </div>
-        <div className="animate-orbit" style={{ animationDuration: "18s", animationDelay: "5s" }}>
-          <div className="w-1.5 h-1.5 rounded-full bg-accent/30 shadow-glow-sm" />
+        <div className="animate-orbit" style={{ animationDuration: "14s", animationDelay: "3s" }}>
+          <div className="w-2.5 h-2.5 rounded-full bg-accent/50 shadow-glow-sm" />
         </div>
-        <div className="animate-orbit" style={{ animationDuration: "30s", animationDelay: "10s" }}>
-          <div className="w-1 h-1 rounded-full bg-primary/40" />
+        <div className="animate-orbit" style={{ animationDuration: "26s", animationDelay: "7s" }}>
+          <div className="w-2 h-2 rounded-full bg-primary/60 shadow-glow-sm" />
         </div>
       </div>
 
