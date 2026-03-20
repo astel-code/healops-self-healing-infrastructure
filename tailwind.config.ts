@@ -80,16 +80,38 @@ export default {
           to: { height: "0" },
         },
         "float": {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-10px)" },
+          "0%, 100%": { transform: "translateY(0) rotate(0deg)" },
+          "50%": { transform: "translateY(-15px) rotate(3deg)" },
+        },
+        "float-slow": {
+          "0%, 100%": { transform: "translateY(0) rotate(0deg)" },
+          "50%": { transform: "translateY(-20px) rotate(-2deg)" },
+        },
+        "float-reverse": {
+          "0%, 100%": { transform: "translateY(-10px) rotate(-3deg)" },
+          "50%": { transform: "translateY(10px) rotate(2deg)" },
         },
         "pulse-glow": {
-          "0%, 100%": { opacity: "0.4" },
-          "50%": { opacity: "1" },
+          "0%, 100%": { opacity: "0.3", transform: "scale(1)" },
+          "50%": { opacity: "0.8", transform: "scale(1.1)" },
+        },
+        "orbit": {
+          "0%": { transform: "rotate(0deg) translateX(80px) rotate(0deg)" },
+          "100%": { transform: "rotate(360deg) translateX(80px) rotate(-360deg)" },
+        },
+        "drift": {
+          "0%, 100%": { transform: "translate(0, 0)" },
+          "25%": { transform: "translate(30px, -20px)" },
+          "50%": { transform: "translate(-10px, -40px)" },
+          "75%": { transform: "translate(-30px, -10px)" },
         },
         "count-up": {
           from: { opacity: "0", transform: "translateY(10px)" },
           to: { opacity: "1", transform: "translateY(0)" },
+        },
+        "shimmer": {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
         },
       },
       animation: {
