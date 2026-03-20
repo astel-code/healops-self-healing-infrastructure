@@ -57,14 +57,14 @@ const HeroSection = () => {
 
       {/* Orbiting particle ring */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0">
-        <div className="animate-orbit" style={{ animationDuration: "25s" }}>
-          <div className="w-2 h-2 rounded-full bg-primary/30 shadow-glow-sm" />
+        <div className="animate-orbit" style={{ animationDuration: "20s" }}>
+          <div className="w-3 h-3 rounded-full bg-primary/50 shadow-glow-sm" />
         </div>
-        <div className="animate-orbit" style={{ animationDuration: "18s", animationDelay: "5s" }}>
-          <div className="w-1.5 h-1.5 rounded-full bg-accent/30 shadow-glow-sm" />
+        <div className="animate-orbit" style={{ animationDuration: "14s", animationDelay: "3s" }}>
+          <div className="w-2.5 h-2.5 rounded-full bg-accent/50 shadow-glow-sm" />
         </div>
-        <div className="animate-orbit" style={{ animationDuration: "30s", animationDelay: "10s" }}>
-          <div className="w-1 h-1 rounded-full bg-primary/40" />
+        <div className="animate-orbit" style={{ animationDuration: "26s", animationDelay: "7s" }}>
+          <div className="w-2 h-2 rounded-full bg-primary/60 shadow-glow-sm" />
         </div>
       </div>
 
