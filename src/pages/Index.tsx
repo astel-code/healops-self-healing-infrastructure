@@ -7,6 +7,7 @@ import FeaturesSection from "@/components/FeaturesSection";
 import UseCasesSection from "@/components/UseCasesSection";
 import BusinessValueSection from "@/components/BusinessValueSection";
 import FutureVisionSection from "@/components/FutureVisionSection";
+import AwsSignInSection from "@/components/AwsSignInSection";
 import ContactSection from "@/components/ContactSection";
 import FooterSection from "@/components/FooterSection";
 import ChatbotIcon from "@/components/ChatbotIcon";
@@ -26,6 +27,7 @@ const Index = () => (
     <UseCasesSection />
     <BusinessValueSection />
     <FutureVisionSection />
+    <AwsSignInSection />
     <ContactSection />
     <FooterSection />
     <ChatbotIcon />
