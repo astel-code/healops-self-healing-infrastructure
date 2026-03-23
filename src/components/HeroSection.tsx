@@ -6,14 +6,14 @@ import heroBg from "@/assets/hero-bg.jpg";
 import { simulateHeal, triggerWebhook } from "@/api";
 
 const floatingIcons = [
-  { Icon: Shield, className: "top-[15%] left-[10%] animate-float text-primary/40", size: 40 },
-  { Icon: Cpu, className: "top-[18%] right-[12%] animate-float-slow text-accent/40", size: 36 },
-  { Icon: Activity, className: "bottom-[28%] left-[7%] animate-float-reverse text-primary/30", size: 44 },
-  { Icon: CloudCog, className: "top-[45%] right-[5%] animate-float text-accent/30", size: 38, delay: "2s" },
-  { Icon: Radar, className: "bottom-[18%] right-[14%] animate-float-slow text-primary/35", size: 34, delay: "1s" },
-  { Icon: Wrench, className: "top-[65%] left-[4%] animate-float-reverse text-accent/30", size: 32, delay: "3s" },
-  { Icon: Shield, className: "top-[10%] left-[45%] animate-float-slow text-primary/20", size: 24, delay: "4s" },
-  { Icon: Cpu, className: "bottom-[12%] left-[30%] animate-float text-accent/25", size: 28, delay: "1.5s" },
+  { Icon: Shield, className: "top-[15%] left-[10%] animate-float text-primary/70", size: 40 },
+  { Icon: Cpu, className: "top-[18%] right-[12%] animate-float-slow text-accent/70", size: 36 },
+  { Icon: Activity, className: "bottom-[28%] left-[7%] animate-float-reverse text-primary/60", size: 44 },
+  { Icon: CloudCog, className: "top-[45%] right-[5%] animate-float text-accent/60", size: 38, delay: "2s" },
+  { Icon: Radar, className: "bottom-[18%] right-[14%] animate-float-slow text-primary/65", size: 34, delay: "1s" },
+  { Icon: Wrench, className: "top-[65%] left-[4%] animate-float-reverse text-accent/60", size: 32, delay: "3s" },
+  { Icon: Shield, className: "top-[10%] left-[45%] animate-float-slow text-primary/45", size: 24, delay: "4s" },
+  { Icon: Cpu, className: "bottom-[12%] left-[30%] animate-float text-accent/50", size: 28, delay: "1.5s" },
 ];
 
 const HeroSection = () => {
