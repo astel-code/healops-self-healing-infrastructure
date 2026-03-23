@@ -61,18 +61,6 @@ const HeroSection = () => {
         </motion.div>
       ))}
 
-      {/* Orbiting particle ring */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0">
-        <div className="animate-orbit" style={{ animationDuration: "20s" }}>
-          <div className="w-3 h-3 rounded-full bg-primary/80 shadow-glow-sm" />
-        </div>
-        <div className="animate-orbit" style={{ animationDuration: "14s", animationDelay: "3s" }}>
-          <div className="w-2.5 h-2.5 rounded-full bg-accent/80 shadow-glow-sm" />
-        </div>
-        <div className="animate-orbit" style={{ animationDuration: "26s", animationDelay: "7s" }}>
-          <div className="w-2 h-2 rounded-full bg-primary/90 shadow-glow-sm" />
-        </div>
-      </div>
 
       <motion.div className="container relative z-10 mx-auto px-4 text-center" style={{ opacity }}>
         <motion.div
