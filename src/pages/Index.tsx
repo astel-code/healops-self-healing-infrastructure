@@ -27,6 +27,7 @@ const Index = () => (
     <UseCasesSection />
     <BusinessValueSection />
     <FutureVisionSection />
+    <AwsSignInSection />
     <ContactSection />
     <FooterSection />
     <ChatbotIcon />
